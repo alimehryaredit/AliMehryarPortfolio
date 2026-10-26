@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>بریف پروژه – علی مهریار</title>
+<meta name="description" content="درباره پروژه‌تان بگویید: خدمات مورد نیاز را انتخاب کنید و به چند سؤال پاسخ دهید.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Persian font: Vazirmatn (Google Fonts). Change the font here and in --serif / --sans below. -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,800;1,500&family=Manrope:wght@300;400;600&family=Vazirmatn:wght@300;400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#161616;--ink:#f1f0ec;--mute:#9b9a96;--line:#3a3a38;--serif:"Vazirmatn","Playfair Display",Tahoma,sans-serif;--sans:"Vazirmatn","Manrope",Tahoma,sans-serif;--ease:cubic-bezier(.2,.7,.1,1)}
+:root{--fs-body:15px;--fs-title:clamp(40px,8vw,96px);--fs-h2:clamp(22px,3vw,32px);--fs-label:13px}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font:300 var(--fs-body)/1.7 var(--sans);overflow-x:hidden}
+a{color:inherit}:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.wrap{max-width:860px;margin:auto;padding:0 clamp(16px,4vw,32px)}
+
+nav{position:fixed;inset:0 0 auto;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:14px clamp(16px,4vw,48px);transition:background .4s,backdrop-filter .4s}
+nav.solid{background:rgba(22,22,22,.78);backdrop-filter:blur(10px)}
+.logo{font:italic 500 20px var(--serif);text-decoration:none}
+.links{display:flex;gap:clamp(14px,3vw,34px);align-items:center;font-size:20px;font-weight:600}
+.links a{text-decoration:none;position:relative}
+.links a::after{content:"";position:absolute;left:0;bottom:0;height:1px;width:100%;background:var(--ink);transform:scaleX(0);transform-origin:right;transition:transform .45s var(--ease)}
+.links a:hover::after{transform:scaleX(1);transform-origin:left}
+@media(max-width:700px){.links{display:none}}
+#bar{position:fixed;top:0;left:0;height:2px;width:100%;background:var(--ink);transform:scaleX(0);transform-origin:left;z-index:30}
+
+.top{padding:clamp(120px,18vw,190px) 0 40px}
+h1{font:800 var(--fs-title)/1.02 var(--serif)}
+h1 span{display:inline-block;opacity:0;transform:translateY(60%) rotate(3deg);animation:up 1s var(--ease) forwards;animation-delay:calc(var(--i)*45ms + 150ms)}
+.top p{max-width:54ch;color:#cfcdc7;margin-top:22px;opacity:0;animation:fade 1.2s .9s forwards}
+@keyframes up{to{opacity:1;transform:none}}@keyframes fade{to{opacity:1}}
+
+fieldset{border:0;padding:clamp(34px,6vw,64px) 0;border-top:1px solid var(--line);min-width:0}
+legend{float:left;width:100%;font:800 var(--fs-h2)/1.15 var(--serif);margin-bottom:28px;display:flex;gap:16px;align-items:baseline}
+legend i{font:italic 500 16px var(--serif);color:var(--mute)}
+legend+*{clear:both}
+.rv{opacity:0;transform:translateY(24px);transition:opacity .9s,transform .9s var(--ease)}.rv.in{opacity:1;transform:none}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:6px 28px}
+@media(max-width:640px){.row{grid-template-columns:1fr}}
+
+.f{display:block;margin-bottom:22px}
+.f>span{display:block;font-size:var(--fs-label);color:var(--mute);margin-bottom:6px}
+.f b{color:var(--ink);font-weight:600}
+input[type=text],input[type=email],input[type=url],select,textarea{width:100%;background:transparent;color:var(--ink);border:0;border-bottom:1px solid var(--line);padding:9px 0;font:400 15px var(--sans);border-radius:0;transition:border-color .3s}
+textarea{min-height:92px;resize:vertical;border:1px solid var(--line);padding:10px 12px}
+select option{background:#1d1d1d;color:var(--ink)}
+input:focus,select:focus,textarea:focus{outline:0;border-color:var(--ink)}
+input::placeholder,textarea::placeholder{color:#6f6e6a}
+
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{position:relative}
+.chip input{position:absolute;opacity:0;inset:0;cursor:pointer}
+.chip span{display:inline-block;padding:8px 16px;border:1px solid var(--line);font-size:13px;font-weight:600;transition:background .3s,color .3s,border-color .3s,transform .3s var(--ease)}
+.chip:hover span{border-color:var(--ink);transform:translateY(-2px)}
+.chip input:checked+span{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.chip input:focus-visible+span{outline:2px solid var(--ink);outline-offset:3px}
+.svcs .chip span{padding:12px 20px;font-size:14px}
+.sw{margin-top:12px;font-size:13px}.sw a{color:var(--mute);text-decoration:none;border-bottom:1px solid var(--line);transition:color .3s}.sw a:hover{color:var(--ink)}
+.err{color:#ff8f7a;font-size:13px;margin-top:12px}
+
+.panel{display:grid;grid-template-rows:0fr;opacity:0;transition:grid-template-rows .7s var(--ease),opacity .6s}
+.panel.open{grid-template-rows:1fr;opacity:1}
+.panel>div{overflow:hidden;min-height:0}
+.panel .in{padding:26px 0 4px;border-top:1px solid var(--line);margin-top:30px}
+.panel h3{font:700 20px var(--serif);margin-bottom:18px;display:inline-block;padding-bottom:6px;background:linear-gradient(var(--ink),var(--ink)) left bottom/40px 2px no-repeat}
+.none{color:var(--mute);font-size:14px}
+
+.go{display:inline-block;margin-top:8px;background:var(--ink);color:var(--bg);border:0;padding:14px 34px;font:600 14px var(--sans);cursor:pointer;transition:transform .3s var(--ease),opacity .3s}
+.go:hover{transform:translateY(-2px)}.go:disabled{opacity:.5;cursor:wait}
+.ghost{background:none;color:var(--ink);border:1px solid var(--ink);margin-left:8px}
+#fb,#ok{display:none;padding:34px 0 60px}
+#fb.on,#ok.on{display:block}
+#fb textarea{min-height:240px;font-size:13px;margin:16px 0}
+#ok h2{font:800 clamp(28px,4vw,44px)/1.1 var(--serif);margin-bottom:14px}
+.hp{position:absolute;left:-9999px}
+footer{padding:30px 0 60px;text-align:center;color:var(--mute);font-size:12px}
+@media(prefers-reduced-motion:reduce){*,*::after{animation:none!important;transition:none!important}h1 span,.top p,.rv{opacity:1!important;transform:none!important}}
+/* ---- RTL (Persian) adjustments ---- */
+h1{line-height:1.35}
+.logo{font-style:normal}
+.links{font-size:17px;font-weight:600}
+legend i{font-style:normal}
+.panel h3{background-position:right bottom}
+.ghost{margin-left:0;margin-right:8px}
+input[type=email],input[type=url],input[name=phone],input[name=instagram]{direction:ltr;text-align:right}
+</style>
+</head>
+<body>
+<div id="bar"></div>
+<nav id="nav"><a class="logo" href="index.html">Ali Mehryar</a>
+  <div class="links"><a href="index.html#home">خانه</a><a href="index.html#work">نمونه‌کارها</a><a href="index.html#services">خدمات</a><a href="index.html#contact">تماس</a></div></nav>
+
+<main class="wrap">
+  <header class="top">
+    <h1 id="title" aria-label="بریف پروژه"></h1>
+    <p>درباره‌ی پروژه‌تان برایم بنویسید. خدمات مورد نیاز را انتخاب کنید، به سؤال‌هایی که برای هر خدمت نمایش داده می‌شود پاسخ دهید و من بریف شما را بررسی می‌کنم و با شما در تماس خواهم بود.</p>
+    <p class="sw"><a href="brief.html" lang="en" dir="ltr">English version</a></p>
+  </header>
+
+  <form id="brief" novalidate>
+    <input class="hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+    <fieldset class="rv"><legend><i>01</i>درباره‌ی شما</legend>
+      <div class="row">
+        <label class="f"><span>نام و نام خانوادگی <b>*</b></span><input type="text" name="name" required autocomplete="name"></label>
+        <label class="f"><span>ایمیل <b>*</b></span><input type="email" name="email" required autocomplete="email"></label>
+        <label class="f"><span>شماره تماس یا آیدی تلگرام</span><input type="text" name="phone" autocomplete="tel"></label>
+        <label class="f"><span>نام شرکت یا برند</span><input type="text" name="company" autocomplete="organization"></label>
+        <label class="f"><span>شهر و کشور</span><input type="text" name="location" autocomplete="off"></label>
+        <label class="f"><span>حوزه و زمینه‌ی فعالیت</span><input type="text" name="field" placeholder="مثلاً غذا، مد، آموزش، املاک"></label>
+        <label class="f"><span>پیج اینستاگرام (در صورت داشتن)</span><input type="text" name="instagram" placeholder="@username یا لینک"></label>
+        <label class="f"><span>معنای اسم برند (اختیاری)</span><input type="text" name="meaning"></label>
+      </div>
+      <div class="f"><span>بهترین راه ارتباط با شما</span><div class="chips" id="reach"></div></div>
+    </fieldset>
+
+    <fieldset class="rv svcs"><legend><i>02</i>به چه خدماتی نیاز دارید؟</legend>
+      <div class="chips" id="svcChips"></div>
+      <p class="err" id="svcErr" hidden>لطفاً حداقل یک خدمت را انتخاب کنید.</p>
+      <div id="panels"></div>
+    </fieldset>
+
+    <fieldset class="rv"><legend><i>03</i>درباره‌ی پروژه</legend>
+      <label class="f"><span>پروژه‌تان را توضیح دهید <b>*</b></span><textarea name="description" required placeholder="پروژه چیست، برای چه کسانی است و قرار است به چه هدفی برسد؟"></textarea></label>
+      <label class="f"><span>مخاطب هدف برند</span><textarea name="audience" placeholder="مشتریان شما چه کسانی هستند؟ سن، علایق، موقعیت جغرافیایی..."></textarea></label>
+      <label class="f"><span>اهداف درازمدت برند</span><textarea name="goals"></textarea></label>
+      <label class="f"><span>مزیت رقابتی برند شما نسبت به رقبا</span><textarea name="advantage"></textarea></label>
+      <label class="f"><span>پیامی که به دنبال انتقال آن هستید چیست؟</span><textarea name="msg"></textarea></label>
+      <div class="f"><span>لحن و استایل مورد نظر (می‌توانید چند مورد انتخاب کنید)</span><div class="chips" id="tone"></div></div>
+      <label class="f"><span>موارد خاص و محدودیت‌ها</span><textarea name="limits" placeholder="مواردی که حتماً باید باشد، مواردی که نباید باشد، محدودیت‌های قانونی یا فرهنگی..."></textarea></label>
+      <div class="row">
+        <label class="f"><span>مهلت تحویل</span><select name="deadline"><option value="">انتخاب کنید</option><option>هر چه سریع‌تر</option><option>تا ۱ هفته</option><option>۲ تا ۴ هفته</option><option>بیشتر از یک ماه</option><option>انعطاف‌پذیر</option></select></label>
+        <label class="f"><span>بودجه</span><input type="text" name="budget" placeholder="بودجه‌ی تقریبی شما"></label>
+      </div>
+      <label class="f"><span>لینک ویدیو یا نمونه‌کار مورد علاقه‌ی شما</span><textarea name="references" placeholder="هر لینک را در یک خط بنویسید (ویدیو، پروژه یا نمونه‌ی استایل)"></textarea></label>
+      <label class="f"><span>لینک فایل‌ها یا فوتیج شما (درایو، دراپ‌باکس و...)</span><input type="url" name="files" placeholder="https://"></label>
+      <label class="f"><span>توضیح دیگری هست که باید بدانم؟</span><textarea name="notes"></textarea></label>
+      <button class="go" id="send" type="submit">ارسال بریف</button>
+      <p class="err" id="formErr" hidden></p>
+    </fieldset>
+  </form>
+
+  <section id="fb" aria-live="polite">
+    <h2 style="font:800 28px/1.4 var(--serif)">یک قدم تا پایان</h2>
+    <p id="fbMsg" style="color:#cfcdc7;margin-top:10px"></p>
+    <textarea id="fbText" readonly></textarea>
+    <button class="go" id="fbSend" type="button">ارسال با ایمیل</button><button class="go ghost" id="fbCopy" type="button">کپی بریف</button>
+  </section>
+  <section id="ok"><h2 style="line-height:1.4">متشکرم</h2><p style="color:#cfcdc7">بریف شما ارسال شد. آن را بررسی می‌کنم و با شما در تماس خواهم بود.</p><p style="margin-top:22px"><a href="index.html">بازگشت به پورتفولیو</a></p></section>
+</main>
+<footer dir="ltr">Website designed by Ali Mehryar</footer>
+
+<script>
+/* =====================  تنظیمات  ===================== */
+const CONFIG={
+  email:"Alimehryaredit@gmail.com",   // where briefs are sent / fallback address
+  endpoint:"",                         // paste your Formspree or Web3Forms URL to receive briefs automatically (see guide)
+  web3formsKey:""                      // only for Web3Forms: your access key
+};
+const REACH=["ایمیل","تلگرام","تماس تلفنی","واتساپ"];
+const TONE=["رسمی","صمیمی","لوکس","طنز","مینیمال"];
+
+/* ============  سؤال‌های هر خدمت (قابل ویرایش)  ============
+   هر سؤال: [شناسه, متن سؤال, نوع, گزینه‌ها]   نوع: text | area | select | radio (انتخاب یکی) | check (انتخاب چندتا) */
+const Q={
+ "کارگردانی":[
+  ["kind","چه چیزی می‌سازید؟","radio",["تبلیغاتی","فیلم کوتاه","موزیک ویدیو","مستند","محتوای شبکه‌های اجتماعی","سایر"]],
+  ["stage","ایده تا چه مرحله‌ای پیش رفته؟","radio",["فیلمنامه دارم","فقط ایده دارم","نیاز به توسعه‌ی ایده دارم"]],
+  ["days","تعداد تقریبی روزهای فیلمبرداری","text"],["place","محل فیلمبرداری و شهر","text"],
+  ["crew","تأمین بازیگر و عوامل با کیست؟","radio",["خودم","علی مهریار","ترکیبی"]],
+  ["len","مدت زمان نهایی مورد انتظار","text"]],
+ "تدوین ویدیو":[
+  ["kind","نوع ویدیو","radio",["ریلز اینستاگرام","تبلیغ یا پروموشن","تریلر","فیلم کوتاه","مستند","ویدیوی یوتیوب","خلاصه‌ی رویداد","سایر"]],
+  ["len","مدت زمان نهایی","text"],["raw","حجم فوتیج خام (ساعت)","text"],
+  ["ratio","نسبت تصویر","check",["۹:۱۶ عمودی","۱۶:۹ افقی","۱:۱ مربع","چند نسخه"]],
+  ["extras","موارد مورد نیاز دیگر","check",["زیرنویس","موشن گرافیک","اصلاح رنگ","میکس صدا","انتخاب موسیقی"]],
+  ["versions","تعداد ویدیو یا نسخه‌ها","text"]],
+ "فیلمبرداری":[
+  ["kind","نوع فیلمبرداری","radio",["تبلیغاتی","فیلم یا سریال","موزیک ویدیو","رویداد","مصاحبه یا سازمانی","سایر"]],
+  ["days","تعداد روزهای فیلمبرداری","text"],["place","لوکیشن و شهر","text"],["where","داخلی یا خارجی","radio",["داخلی","خارجی","هر دو"]],
+  ["gear","دوربین و نورپردازی","radio",["تجهیزات را خودم تأمین می‌کنم","تجهیزات را علی تأمین می‌کند","هنوز مطمئن نیستم"]],
+  ["res","کیفیت تحویل","radio",["Full HD","4K","مطمئن نیستم"]]],
+ "اصلاح رنگ (کالر گریدینگ)":[
+  ["cam","دوربین و فرمت فوتیج","text"],["log","فوتیج با لاگ یا RAW ضبط شده؟","radio",["بله","خیر","مطمئن نیستم"]],
+  ["len","مدت کل ویدیو برای گریدینگ","text"],["look","حال‌وهوای رنگی مورد نظر","radio",["سینمایی","طبیعی","کنتراست بالا","گرم","سرد","نمونه‌ی مرجع دارم"]],
+  ["deliv","نوع خروجی","radio",["SDR (استاندارد)","HDR","مطمئن نیستم"]]],
+ "طراحی گرافیک":[
+  ["kind","به چه چیزی نیاز دارید؟","check",["پوستر","لوگو یا هویت بصری","پکیج شبکه‌های اجتماعی","کاور یا تامبنیل","بسته‌بندی","سایر"]],
+  ["count","چند طرح نیاز دارید؟","text"],["brand","راهنمای هویت بصری (برندبوک) دارید؟","radio",["بله","خیر"]],
+  ["use","کاربرد طرح","radio",["فقط دیجیتال","چاپ","هر دو"]],
+  ["lang","زبان متن","check",["فارسی","انگلیسی","سایر"]]],
+ "عکاسی":[
+  ["kind","نوع عکاسی","radio",["پرتره","پشت صحنه","محصول","رویداد","مد یا لایف‌استایل","سایر"]],
+  ["time","مدت جلسه (ساعت)","text"],["place","لوکیشن و شهر","text"],
+  ["count","تعداد عکس‌های نهایی روتوش‌شده","text"],
+  ["use","کاربرد عکس‌ها","check",["شبکه‌های اجتماعی","چاپ","وب‌سایت","نشریه"]]],
+ "موشن گرافیک":[
+  ["kind","به چه چیزی نیاز دارید؟","check",["تیتراژ","انیمیشن لوگو","ویدیوی توضیحی (اکسپلینر)","زیرنویس‌های گرافیکی","تبلیغ شبکه‌های اجتماعی","سایر"]],
+  ["len","مدت زمان","text"],["ratio","نسبت تصویر","check",["۹:۱۶ عمودی","۱۶:۹ افقی","۱:۱ مربع"]],
+  ["assets","فایل‌های برند موجود است؟","radio",["لوگو و فونت آماده است","فقط لوگو دارم","هنوز چیزی ندارم"]],
+  ["style","استایل مورد نظر","text"]],
+ "طراحی صدا":[
+  ["kind","به چه چیزی نیاز دارید؟","check",["طراحی صدا","میکس","فولی","گویندگی یا دوبله","پاک‌سازی دیالوگ","انتخاب موسیقی"]],
+  ["len","مدت زمان فیلم","text"],["lock","تصویر نهایی (قفل‌شده) است؟","radio",["بله","خیر","مطمئن نیستم"]],
+  ["mix","فرمت خروجی","radio",["استریو","5.1","مطمئن نیستم"]]]
+};
+
+/* =====================  BUILD  ===================== */
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+const form=$("#brief"),names=Object.keys(Q);
+$("#title").innerHTML="بریف پروژه".split(" ").map((w,i)=>`<span style="--i:${i}">${w}</span>`).join(" ");
+const chip=(type,name,val)=>`<label class="chip"><input type="${type}" name="${name}" value="${val}"><span>${val}</span></label>`;
+$("#reach").innerHTML=REACH.map(r=>chip("radio","reach",r)).join("");
+$("#tone").innerHTML=TONE.map(t=>chip("checkbox","tone",t)).join("");
+$("#svcChips").innerHTML=names.map(n=>chip("checkbox","services",n)).join("");
+const fld=(k,[id,label,type,opts])=>{const n=`${k}__${id}`;
+  if(type==="text")return`<label class="f"><span>${label}</span><input type="text" name="${n}"></label>`;
+  if(type==="area")return`<label class="f"><span>${label}</span><textarea name="${n}"></textarea></label>`;
+  if(type==="select")return`<label class="f"><span>${label}</span><select name="${n}"><option value="">انتخاب کنید</option>${opts.map(o=>`<option>${o}</option>`).join("")}</select></label>`;
+  return`<div class="f"><span>${label}</span><div class="chips">${opts.map(o=>chip(type==="radio"?"radio":"checkbox",n,o)).join("")}</div></div>`};
+$("#panels").innerHTML=names.map(k=>`<div class="panel" data-s="${k}" inert><div><div class="in"><h3>${k}</h3><div class="row">${Q[k].map(q=>fld(k,q)).join("")}</div></div></div></div>`).join("");
+
+$$('[name=services]').forEach(cb=>cb.addEventListener("change",()=>{
+  const p=$(`.panel[data-s="${cb.value}"]`);p.classList.toggle("open",cb.checked);p.inert=!cb.checked;
+  if($$("[name=services]:checked").length)$("#svcErr").hidden=true}));
+
+/* =====================  SUBMIT  ===================== */
+function collect(){
+  const fd=new FormData(form),get=n=>fd.getAll(n).filter(Boolean).join("، "),L=[],add=(l,v)=>{if(v)L.push(`${l}: ${v}`)};
+  const sel=fd.getAll("services");
+  L.push("اطلاعات مشتری");add("نام",get("name"));add("ایمیل",get("email"));add("تلفن / تلگرام",get("phone"));add("شرکت یا برند",get("company"));add("شهر و کشور",get("location"));add("حوزه فعالیت",get("field"));add("اینستاگرام",get("instagram"));add("معنای اسم برند",get("meaning"));add("راه ارتباطی ترجیحی",get("reach"));
+  L.push("","خدمات: "+sel.join("، "));
+  sel.forEach(k=>{L.push("","— "+k+" —");Q[k].forEach(([id,label])=>add(label,get(`${k}__${id}`)))});
+  L.push("","پروژه");add("توضیح پروژه",get("description"));add("مخاطب هدف",get("audience"));add("اهداف درازمدت",get("goals"));add("مزیت رقابتی",get("advantage"));add("پیام برند",get("msg"));add("لحن و استایل",get("tone"));add("موارد خاص و محدودیت‌ها",get("limits"));add("مهلت تحویل",get("deadline"));add("بودجه",get("budget"));add("لینک ویدیو / نمونه‌کار",get("references"));add("لینک فایل‌ها",get("files"));add("توضیحات بیشتر",get("notes"));
+  return{name:get("name"),email:get("email"),text:L.join("\n")}}
+const mobile=()=>/Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+function mailTo(subject,body){
+  const u=mobile()?`mailto:${CONFIG.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+    :`https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(CONFIG.email)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  mobile()?location.href=u:window.open(u,"_blank","noopener")}
+function fallback(msg,d){
+  $("#fbMsg").textContent=msg;$("#fbText").value=d.text;$("#fb").classList.add("on");form.style.display="none";
+  $("#fbSend").onclick=()=>mailTo(`بریف پروژه از ${d.name}`,d.text);
+  $("#fbCopy").onclick=()=>{$("#fbText").select();(navigator.clipboard?navigator.clipboard.writeText(d.text):Promise.reject()).catch(()=>document.execCommand("copy"));$("#fbCopy").textContent="کپی شد"};
+  $("#fb").scrollIntoView({behavior:"smooth"})}
+form.addEventListener("submit",async e=>{
+  e.preventDefault();const fe=$("#formErr");fe.hidden=true;
+  if($("[name=_gotcha]").value)return;
+  if(!$$("[name=services]:checked").length){$("#svcErr").hidden=false;$("#svcChips").scrollIntoView({behavior:"smooth",block:"center"});return}
+  const bad=$$("[required]",form).find(el=>!el.value.trim()||(el.type==="email"&&!/^\S+@\S+\.\S+$/.test(el.value)));
+  if(bad){bad.focus();fe.textContent="لطفاً فیلدهای ستاره‌دار را با یک ایمیل معتبر پر کنید.";fe.hidden=false;return}
+  const d=collect();
+  if(!CONFIG.endpoint)return fallback("بریف خود را در زیر بررسی کنید و سپس با ایمیل ارسال کنید.",d);
+  const btn=$("#send");btn.disabled=true;btn.textContent="در حال ارسال…";
+  try{
+    const body={subject:`بریف پروژه از ${d.name}`,name:d.name,email:d.email,message:d.text};
+    if(CONFIG.web3formsKey)body.access_key=CONFIG.web3formsKey;
+    const r=await fetch(CONFIG.endpoint,{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(body)});
+    const j=await r.json().catch(()=>({}));
+    if(!r.ok||j.success===false)throw 0;
+    form.style.display="none";$("#ok").classList.add("on");$("#ok").scrollIntoView({behavior:"smooth"});
+  }catch(_){btn.disabled=false;btn.textContent="ارسال بریف";fallback("ارسال خودکار انجام نشد. می‌توانید بریف را با ایمیل بفرستید.",d)}
+});
+
+/* =====================  MOTION  ===================== */
+const io=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){x.target.classList.add("in");io.unobserve(x.target)}}),{threshold:.08});
+$$(".rv").forEach(el=>io.observe(el));
+const nav=$("#nav"),bar=$("#bar");let tick=false;
+function onScroll(){const y=scrollY,h=document.documentElement.scrollHeight-innerHeight;nav.classList.toggle("solid",y>50);bar.style.transform=`scaleX(${h>0?y/h:0})`;tick=false}
+addEventListener("scroll",()=>{if(!tick){tick=true;requestAnimationFrame(onScroll)}},{passive:true});onScroll();
+</script>
+</body>
+</html>

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Project brief – Ali Mehryar</title>
+<meta name="description" content="Tell me about your project: choose the services you need and answer a few questions.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Keep this font link and the two font variables below the same as in index.html -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,800;1,500&family=Manrope:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#161616;--ink:#f1f0ec;--mute:#9b9a96;--line:#3a3a38;--serif:"Playfair Display",Georgia,serif;--sans:"Manrope",system-ui,sans-serif;--ease:cubic-bezier(.2,.7,.1,1)}
+:root{--fs-body:15px;--fs-title:clamp(40px,8vw,96px);--fs-h2:clamp(22px,3vw,32px);--fs-label:13px}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font:300 var(--fs-body)/1.7 var(--sans);overflow-x:hidden}
+a{color:inherit}:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.wrap{max-width:860px;margin:auto;padding:0 clamp(16px,4vw,32px)}
+
+nav{position:fixed;inset:0 0 auto;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:14px clamp(16px,4vw,48px);transition:background .4s,backdrop-filter .4s}
+nav.solid{background:rgba(22,22,22,.78);backdrop-filter:blur(10px)}
+.logo{font:italic 500 20px var(--serif);text-decoration:none}
+.links{display:flex;gap:clamp(14px,3vw,34px);align-items:center;font-size:20px;font-weight:600}
+.links a{text-decoration:none;position:relative}
+.links a::after{content:"";position:absolute;left:0;bottom:0;height:1px;width:100%;background:var(--ink);transform:scaleX(0);transform-origin:right;transition:transform .45s var(--ease)}
+.links a:hover::after{transform:scaleX(1);transform-origin:left}
+@media(max-width:700px){.links{display:none}}
+#bar{position:fixed;top:0;left:0;height:2px;width:100%;background:var(--ink);transform:scaleX(0);transform-origin:left;z-index:30}
+
+.top{padding:clamp(120px,18vw,190px) 0 40px}
+h1{font:800 var(--fs-title)/1.02 var(--serif)}
+h1 span{display:inline-block;opacity:0;transform:translateY(60%) rotate(3deg);animation:up 1s var(--ease) forwards;animation-delay:calc(var(--i)*45ms + 150ms)}
+.top p{max-width:54ch;color:#cfcdc7;margin-top:22px;opacity:0;animation:fade 1.2s .9s forwards}
+@keyframes up{to{opacity:1;transform:none}}@keyframes fade{to{opacity:1}}
+
+fieldset{border:0;padding:clamp(34px,6vw,64px) 0;border-top:1px solid var(--line);min-width:0}
+legend{float:left;width:100%;font:800 var(--fs-h2)/1.15 var(--serif);margin-bottom:28px;display:flex;gap:16px;align-items:baseline}
+legend i{font:italic 500 16px var(--serif);color:var(--mute)}
+legend+*{clear:both}
+.rv{opacity:0;transform:translateY(24px);transition:opacity .9s,transform .9s var(--ease)}.rv.in{opacity:1;transform:none}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:6px 28px}
+@media(max-width:640px){.row{grid-template-columns:1fr}}
+
+.f{display:block;margin-bottom:22px}
+.f>span{display:block;font-size:var(--fs-label);color:var(--mute);margin-bottom:6px}
+.f b{color:var(--ink);font-weight:600}
+input[type=text],input[type=email],input[type=url],select,textarea{width:100%;background:transparent;color:var(--ink);border:0;border-bottom:1px solid var(--line);padding:9px 0;font:400 15px var(--sans);border-radius:0;transition:border-color .3s}
+textarea{min-height:92px;resize:vertical;border:1px solid var(--line);padding:10px 12px}
+select option{background:#1d1d1d;color:var(--ink)}
+input:focus,select:focus,textarea:focus{outline:0;border-color:var(--ink)}
+input::placeholder,textarea::placeholder{color:#6f6e6a}
+
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{position:relative}
+.chip input{position:absolute;opacity:0;inset:0;cursor:pointer}
+.chip span{display:inline-block;padding:8px 16px;border:1px solid var(--line);font-size:13px;font-weight:600;transition:background .3s,color .3s,border-color .3s,transform .3s var(--ease)}
+.chip:hover span{border-color:var(--ink);transform:translateY(-2px)}
+.chip input:checked+span{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.chip input:focus-visible+span{outline:2px solid var(--ink);outline-offset:3px}
+.svcs .chip span{padding:12px 20px;font-size:14px}
+.sw{margin-top:12px;font-size:13px}.sw a{color:var(--mute);text-decoration:none;border-bottom:1px solid var(--line);transition:color .3s}.sw a:hover{color:var(--ink)}
+.err{color:#ff8f7a;font-size:13px;margin-top:12px}
+
+.panel{display:grid;grid-template-rows:0fr;opacity:0;transition:grid-template-rows .7s var(--ease),opacity .6s}
+.panel.open{grid-template-rows:1fr;opacity:1}
+.panel>div{overflow:hidden;min-height:0}
+.panel .in{padding:26px 0 4px;border-top:1px solid var(--line);margin-top:30px}
+.panel h3{font:700 20px var(--serif);margin-bottom:18px;display:inline-block;padding-bottom:6px;background:linear-gradient(var(--ink),var(--ink)) left bottom/40px 2px no-repeat}
+.none{color:var(--mute);font-size:14px}
+
+.go{display:inline-block;margin-top:8px;background:var(--ink);color:var(--bg);border:0;padding:14px 34px;font:600 14px var(--sans);cursor:pointer;transition:transform .3s var(--ease),opacity .3s}
+.go:hover{transform:translateY(-2px)}.go:disabled{opacity:.5;cursor:wait}
+.ghost{background:none;color:var(--ink);border:1px solid var(--ink);margin-left:8px}
+#fb,#ok{display:none;padding:34px 0 60px}
+#fb.on,#ok.on{display:block}
+#fb textarea{min-height:240px;font-size:13px;margin:16px 0}
+#ok h2{font:800 clamp(28px,4vw,44px)/1.1 var(--serif);margin-bottom:14px}
+.hp{position:absolute;left:-9999px}
+footer{padding:30px 0 60px;text-align:center;color:var(--mute);font-size:12px}
+@media(prefers-reduced-motion:reduce){*,*::after{animation:none!important;transition:none!important}h1 span,.top p,.rv{opacity:1!important;transform:none!important}}
+</style>
+</head>
+<body>
+<div id="bar"></div>
+<nav id="nav"><a class="logo" href="index.html">Ali Mehryar</a>
+  <div class="links"><a href="index.html#home">Home</a><a href="index.html#work">Work</a><a href="index.html#services">Services</a><a href="index.html#contact">Contact</a></div></nav>
+
+<main class="wrap">
+  <header class="top">
+    <h1 id="title" aria-label="Project brief"></h1>
+    <p>Tell me about your project. Pick the services you need, answer the questions that appear for each one, and I will review your brief and get back to you.</p>
+    <p class="sw"><a href="brief-fa.html" lang="fa">نسخه فارسی</a></p>
+  </header>
+
+  <form id="brief" novalidate>
+    <input class="hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+    <fieldset class="rv"><legend><i>01</i>About you</legend>
+      <div class="row">
+        <label class="f"><span>Your name <b>*</b></span><input type="text" name="name" required autocomplete="name"></label>
+        <label class="f"><span>Email <b>*</b></span><input type="email" name="email" required autocomplete="email"></label>
+        <label class="f"><span>Phone or Telegram</span><input type="text" name="phone" autocomplete="tel"></label>
+        <label class="f"><span>Company or brand</span><input type="text" name="company" autocomplete="organization"></label>
+        <label class="f"><span>City and country</span><input type="text" name="location" autocomplete="off"></label>
+        <label class="f"><span>Field of activity</span><input type="text" name="field" placeholder="e.g. food, fashion, education, real estate"></label>
+        <label class="f"><span>Instagram page (if you have one)</span><input type="text" name="instagram" placeholder="@username or link"></label>
+        <label class="f"><span>Meaning of your brand name (optional)</span><input type="text" name="meaning"></label>
+      </div>
+      <div class="f"><span>Best way to reach you</span><div class="chips" id="reach"></div></div>
+    </fieldset>
+
+    <fieldset class="rv svcs"><legend><i>02</i>What do you need?</legend>
+      <div class="chips" id="svcChips"></div>
+      <p class="err" id="svcErr" hidden>Please choose at least one service.</p>
+      <div id="panels"></div>
+    </fieldset>
+
+    <fieldset class="rv"><legend><i>03</i>About the project</legend>
+      <label class="f"><span>Describe your project <b>*</b></span><textarea name="description" required placeholder="What is it, who is it for, and what should it achieve?"></textarea></label>
+      <label class="f"><span>Target audience of your brand</span><textarea name="audience" placeholder="Who are your customers? Age, interests, location..."></textarea></label>
+      <label class="f"><span>Long-term goals of your brand</span><textarea name="goals"></textarea></label>
+      <label class="f"><span>Your competitive advantage over competitors</span><textarea name="advantage"></textarea></label>
+      <label class="f"><span>What message do you want to convey?</span><textarea name="msg"></textarea></label>
+      <div class="f"><span>Desired tone and style (choose any)</span><div class="chips" id="tone"></div></div>
+      <label class="f"><span>Special requirements and limitations</span><textarea name="limits" placeholder="Things to include, things to avoid, legal or cultural limits..."></textarea></label>
+      <div class="row">
+        <label class="f"><span>Deadline</span><select name="deadline"><option value="">Choose</option><option>As soon as possible</option><option>Within 1 week</option><option>2 to 4 weeks</option><option>More than a month</option><option>Flexible</option></select></label>
+        <label class="f"><span>Budget</span><input type="text" name="budget" placeholder="Your approximate budget"></label>
+      </div>
+      <label class="f"><span>Link to a video or sample work you like</span><textarea name="references" placeholder="Paste one link per line (video, project, or style reference)"></textarea></label>
+      <label class="f"><span>Link to your files or footage (Drive, Dropbox, ...)</span><input type="url" name="files" placeholder="https://"></label>
+      <label class="f"><span>Anything else I should know?</span><textarea name="notes"></textarea></label>
+      <button class="go" id="send" type="submit">Send brief</button>
+      <p class="err" id="formErr" hidden></p>
+    </fieldset>
+  </form>
+
+  <section id="fb" aria-live="polite">
+    <h2 style="font:800 28px var(--serif)">Almost done</h2>
+    <p id="fbMsg" style="color:#cfcdc7;margin-top:10px"></p>
+    <textarea id="fbText" readonly></textarea>
+    <button class="go" id="fbSend" type="button">Send by email</button><button class="go ghost" id="fbCopy" type="button">Copy brief</button>
+  </section>
+  <section id="ok"><h2>Thank you</h2><p style="color:#cfcdc7">Your brief has been sent. I will review it and get back to you.</p><p style="margin-top:22px"><a href="index.html">Back to portfolio</a></p></section>
+</main>
+<footer>Website designed by Ali Mehryar</footer>
+
+<script>
+/* =====================  SETTINGS  ===================== */
+const CONFIG={
+  email:"Alimehryaredit@gmail.com",   // where briefs are sent / fallback address
+  endpoint:"",                         // paste your Formspree or Web3Forms URL to receive briefs automatically (see guide)
+  web3formsKey:""                      // only for Web3Forms: your access key
+};
+const REACH=["Email","Telegram","Phone call","WhatsApp"];
+const TONE=["Formal","Friendly","Luxury","Humorous","Minimal"];
+
+/* ============  QUESTIONS PER SERVICE (edit freely)  ============
+   Each question: [id, label, type, options]   type: text | area | select | radio | check            */
+const Q={
+ "Directing":[
+  ["kind","What are you making?","radio",["Commercial","Short film","Music video","Documentary","Social media content","Other"]],
+  ["stage","How far along is the idea?","radio",["I have a script","I have an idea only","I need concept development"]],
+  ["days","Estimated shoot days","text"],["place","Shoot location and city","text"],
+  ["crew","Who provides cast and crew?","radio",["I do","Ali arranges them","Mixed"]],
+  ["len","Expected final length","text"]],
+ "Video Editing":[
+  ["kind","What type of video?","radio",["Instagram Reel","Ad or promo","Trailer","Short film","Documentary","YouTube video","Event recap","Other"]],
+  ["len","Final length","text"],["raw","How much raw footage? (hours)","text"],
+  ["ratio","Aspect ratio","check",["9:16 vertical","16:9 landscape","1:1 square","Multiple versions"]],
+  ["extras","Also needed","check",["Subtitles","Motion graphics","Color grading","Sound mix","Music selection"]],
+  ["versions","How many videos or versions?","text"]],
+ "Cinematography":[
+  ["kind","Type of shoot","radio",["Commercial","Film or series","Music video","Event","Interview or corporate","Other"]],
+  ["days","Shoot days","text"],["place","Location and city","text"],["where","Indoor or outdoor","radio",["Indoor","Outdoor","Both"]],
+  ["gear","Camera and lighting","radio",["I provide equipment","Ali provides equipment","Not sure yet"]],
+  ["res","Delivery resolution","radio",["Full HD","4K","Not sure"]]],
+ "Color Grading":[
+  ["cam","Camera and format of the footage","text"],["log","Shot in log or RAW?","radio",["Yes","No","Not sure"]],
+  ["len","Total duration to grade","text"],["look","Look you want","radio",["Cinematic","Natural","High contrast","Warm","Cold","Reference attached"]],
+  ["deliv","Delivery","radio",["SDR (standard)","HDR","Not sure"]]],
+ "Graphic Design":[
+  ["kind","What do you need?","check",["Poster","Logo or identity","Social media set","Cover or thumbnail","Packaging","Other"]],
+  ["count","How many pieces?","text"],["brand","Do you have brand guidelines?","radio",["Yes","No"]],
+  ["use","Where will it be used?","radio",["Digital only","Print","Both"]],
+  ["lang","Language of the text","check",["Persian","English","Other"]]],
+ "Photography":[
+  ["kind","Type of photography","radio",["Portrait","Behind the scenes","Product","Event","Fashion or lifestyle","Other"]],
+  ["time","Session length (hours)","text"],["place","Location and city","text"],
+  ["count","Number of final retouched photos","text"],
+  ["use","Where will they be used?","check",["Social media","Print","Website","Publication"]]],
+ "Motion Graphics":[
+  ["kind","What do you need?","check",["Title sequence","Logo animation","Explainer","Lower thirds","Social media ad","Other"]],
+  ["len","Length","text"],["ratio","Aspect ratio","check",["9:16 vertical","16:9 landscape","1:1 square"]],
+  ["assets","Brand assets available?","radio",["Logo and fonts ready","Only a logo","Nothing yet"]],
+  ["style","Style you have in mind","text"]],
+ "Sound Design":[
+  ["kind","What do you need?","check",["Sound design","Mixing","Foley","Voice over or dubbing","Dialogue cleanup","Music selection"]],
+  ["len","Runtime","text"],["lock","Is the picture locked?","radio",["Yes","No","Not sure"]],
+  ["mix","Delivery format","radio",["Stereo","5.1","Not sure"]]]
+};
+
+/* =====================  BUILD  ===================== */
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+const form=$("#brief"),names=Object.keys(Q);
+$("#title").innerHTML=[..."Project brief"].map((c,i)=>c==" "?" ":`<span style="--i:${i}">${c}</span>`).join("");
+const chip=(type,name,val)=>`<label class="chip"><input type="${type}" name="${name}" value="${val}"><span>${val}</span></label>`;
+$("#reach").innerHTML=REACH.map(r=>chip("radio","reach",r)).join("");
+$("#tone").innerHTML=TONE.map(t=>chip("checkbox","tone",t)).join("");
+$("#svcChips").innerHTML=names.map(n=>chip("checkbox","services",n)).join("");
+const fld=(k,[id,label,type,opts])=>{const n=`${k}__${id}`;
+  if(type==="text")return`<label class="f"><span>${label}</span><input type="text" name="${n}"></label>`;
+  if(type==="area")return`<label class="f"><span>${label}</span><textarea name="${n}"></textarea></label>`;
+  if(type==="select")return`<label class="f"><span>${label}</span><select name="${n}"><option value="">Choose</option>${opts.map(o=>`<option>${o}</option>`).join("")}</select></label>`;
+  return`<div class="f"><span>${label}</span><div class="chips">${opts.map(o=>chip(type==="radio"?"radio":"checkbox",n,o)).join("")}</div></div>`};
+$("#panels").innerHTML=names.map(k=>`<div class="panel" data-s="${k}" inert><div><div class="in"><h3>${k}</h3><div class="row">${Q[k].map(q=>fld(k,q)).join("")}</div></div></div></div>`).join("");
+
+$$('[name=services]').forEach(cb=>cb.addEventListener("change",()=>{
+  const p=$(`.panel[data-s="${cb.value}"]`);p.classList.toggle("open",cb.checked);p.inert=!cb.checked;
+  if($$("[name=services]:checked").length)$("#svcErr").hidden=true}));
+
+/* =====================  SUBMIT  ===================== */
+function collect(){
+  const fd=new FormData(form),get=n=>fd.getAll(n).filter(Boolean).join(", "),L=[],add=(l,v)=>{if(v)L.push(`${l}: ${v}`)};
+  const sel=fd.getAll("services");
+  L.push("ABOUT THE CLIENT");add("Name",get("name"));add("Email",get("email"));add("Phone / Telegram",get("phone"));add("Company",get("company"));add("City and country",get("location"));add("Field of activity",get("field"));add("Instagram",get("instagram"));add("Brand name meaning",get("meaning"));add("Best way to reach",get("reach"));
+  L.push("","SERVICES: "+sel.join(", "));
+  sel.forEach(k=>{L.push("","— "+k+" —");Q[k].forEach(([id,label])=>add(label,get(`${k}__${id}`)))});
+  L.push("","PROJECT");add("Description",get("description"));add("Target audience",get("audience"));add("Long-term goals",get("goals"));add("Competitive advantage",get("advantage"));add("Message to convey",get("msg"));add("Tone and style",get("tone"));add("Special requirements and limitations",get("limits"));add("Deadline",get("deadline"));add("Budget",get("budget"));add("Video / sample work links",get("references"));add("Files",get("files"));add("Notes",get("notes"));
+  return{name:get("name"),email:get("email"),text:L.join("\n")}}
+const mobile=()=>/Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+function mailTo(subject,body){
+  const u=mobile()?`mailto:${CONFIG.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+    :`https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(CONFIG.email)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  mobile()?location.href=u:window.open(u,"_blank","noopener")}
+function fallback(msg,d){
+  $("#fbMsg").textContent=msg;$("#fbText").value=d.text;$("#fb").classList.add("on");form.style.display="none";
+  $("#fbSend").onclick=()=>mailTo(`Project brief from ${d.name}`,d.text);
+  $("#fbCopy").onclick=()=>{$("#fbText").select();(navigator.clipboard?navigator.clipboard.writeText(d.text):Promise.reject()).catch(()=>document.execCommand("copy"));$("#fbCopy").textContent="Copied"};
+  $("#fb").scrollIntoView({behavior:"smooth"})}
+form.addEventListener("submit",async e=>{
+  e.preventDefault();const fe=$("#formErr");fe.hidden=true;
+  if($("[name=_gotcha]").value)return;
+  if(!$$("[name=services]:checked").length){$("#svcErr").hidden=false;$("#svcChips").scrollIntoView({behavior:"smooth",block:"center"});return}
+  const bad=$$("[required]",form).find(el=>!el.value.trim()||(el.type==="email"&&!/^\S+@\S+\.\S+$/.test(el.value)));
+  if(bad){bad.focus();fe.textContent="Please fill in the fields marked with *, with a valid email.";fe.hidden=false;return}
+  const d=collect();
+  if(!CONFIG.endpoint)return fallback("Review your brief below, then send it by email.",d);
+  const btn=$("#send");btn.disabled=true;btn.textContent="Sending…";
+  try{
+    const body={subject:`Project brief from ${d.name}`,name:d.name,email:d.email,message:d.text};
+    if(CONFIG.web3formsKey)body.access_key=CONFIG.web3formsKey;
+    const r=await fetch(CONFIG.endpoint,{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(body)});
+    const j=await r.json().catch(()=>({}));
+    if(!r.ok||j.success===false)throw 0;
+    form.style.display="none";$("#ok").classList.add("on");$("#ok").scrollIntoView({behavior:"smooth"});
+  }catch(_){btn.disabled=false;btn.textContent="Send brief";fallback("We could not send it automatically. You can send it by email instead.",d)}
+});
+
+/* =====================  MOTION  ===================== */
+const io=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){x.target.classList.add("in");io.unobserve(x.target)}}),{threshold:.08});
+$$(".rv").forEach(el=>io.observe(el));
+const nav=$("#nav"),bar=$("#bar");let tick=false;
+function onScroll(){const y=scrollY,h=document.documentElement.scrollHeight-innerHeight;nav.classList.toggle("solid",y>50);bar.style.transform=`scaleX(${h>0?y/h:0})`;tick=false}
+addEventListener("scroll",()=>{if(!tick){tick=true;requestAnimationFrame(onScroll)}},{passive:true});onScroll();
+</script>
+</body>
+</html>
