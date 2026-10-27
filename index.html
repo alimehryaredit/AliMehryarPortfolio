@@ -190,6 +190,35 @@ h3::after{content:"";flex:1;height:1px;background:var(--line)}
 .social .social-label{color:var(--ink);font-weight:600}
 footer small{font-family:var(--f-footer);color:var(--mute);font-size:var(--fs-footer)}
 
+
+/* FINAL MOBILE OVERRIDES: must come after the default .social rules */
+@media (max-width:700px) {
+  .social {
+    display:grid;
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:5px;
+    width:100%;
+    max-width:560px;
+  }
+  .social a {
+    display:flex;
+    min-width:0;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:5px;
+    padding:9px 2px;
+    font-size:clamp(9px,2.6vw,12px);
+    text-align:center;
+  }
+  .social svg {width:18px;height:18px}
+  .social .social-label {white-space:nowrap}
+}
+@media (max-width:360px) {
+  .social {gap:3px}
+  .social a {font-size:9px}
+}
+
 @media(prefers-reduced-motion:reduce){*,*::after{animation:none!important;transition:none!important}.hero h1 span,.hero p,.svc article,.cap,.tag span,.cover .big{opacity:1!important;transform:none!important}.thumb{clip-path:inset(0)!important}html{scroll-behavior:auto}}
 </style>
 </head>
@@ -204,8 +233,9 @@ footer small{font-family:var(--f-footer);color:var(--mute);font-size:var(--fs-fo
 </nav>
 
 <header class="hero" id="home">
+  <!-- Image files are at the site root beside index.html -->
   <!-- Responsive hero: desktop hero.jpg / mobile hero2.JPG -->
-  <div class="bg" id="heroBg"><picture><source media="(max-width: 700px)" srcset="assets/hero2.JPG"><img src="assets/hero.jpg" alt="" fetchpriority="high"></picture></div>
+  <div class="bg" id="heroBg"><picture><source media="(max-width: 700px)" srcset="assets/hero2.JPG"><img src="assets/Hero.jpg" alt="" fetchpriority="high"></picture></div>
   <div>
     <h1 id="name" aria-label="Ali Mehryar"></h1>
     <p id="role"><span>DIRECTOR <i class="amp">&amp;</i> EDITOR</span></p>
@@ -218,14 +248,14 @@ footer small{font-family:var(--f-footer);color:var(--mute);font-size:var(--fs-fo
     <h2>About me</h2>
     <p>Experienced Director and Video Editor with a strong background in producing advertising, social media, and artistic content. Proven track record as Team Lead for Editing and Content on major platforms. Proficient in Adobe Premiere, After Effects, DaVinci Resolve, Photoshop and Illustrator. Skilled in directing, video editing, concept development, scriptwriting, color grading, motion graphics, photography, videography and project management.</p>
   </div>
-  <!-- Photo: assets/about.jpg -->
-  <div class="frame"><div><img src="assets/about.jpg" alt="Ali Mehryar on set" onerror="this.remove()"></div></div>
+  <!-- Photo: about.jpg -->
+  <div class="frame"><div><img src="assets/About.jpg" alt="Ali Mehryar on set" onerror="this.remove()"></div></div>
 </div></section>
 
 
-<!-- Full-screen photo: put your image at assets/works.jpg -->
+<!-- Full-screen photo: put your image at works.jpg -->
 <section class="cover" id="work-cover" data-for="work">
-  <div class="bg"><img src="assets/works.jpg" alt="" onerror="this.remove()"></div>
+  <div class="bg"><img src="assets/Works.jpg" alt="" onerror="this.remove()"></div>
   <p class="big">Works</p>
 </section>
 
@@ -239,7 +269,7 @@ footer small{font-family:var(--f-footer);color:var(--mute);font-size:var(--fs-fo
 
 <!-- Responsive services cover: desktop services.jpg / mobile services2.JPG -->
 <section class="cover" id="services-cover" data-for="services">
-  <div class="bg"><picture><source media="(max-width: 700px)" srcset="assets/services2.JPG"><img src="assets/services.jpg" alt="" loading="lazy"></picture></div>
+  <div class="bg"><picture><source media="(max-width: 700px)" srcset="assets/services2.JPG"><img src="assets/Services.jpg" alt="" loading="lazy"></picture></div>
   <p class="big">Services</p>
 </section>
 
