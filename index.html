@@ -129,7 +129,27 @@ h3::after{content:"";flex:1;height:1px;background:var(--line)}
 .cover .big{position:relative;z-index:2;font:800 var(--fs-cover)/1 var(--f-cover-works);letter-spacing:.04em;text-transform:uppercase;padding-left:.04em;opacity:0;transform:translateY(40px);transition:opacity 1.2s,transform 1.2s var(--ease)}
 #services-cover .big{font-family:var(--f-cover-services)}
 .cover.in .big{opacity:1;transform:none}
-@media(max-width:700px){nav{grid-template-columns:1fr auto;row-gap:6px}.logo{grid-column:1;grid-row:1}.cta{grid-column:2;grid-row:1}.links{grid-column:1/-1;grid-row:2}html{scroll-padding-top:96px}}
+/* Responsive image wrapper must fill its absolutely positioned background. */
+.hero .bg picture,.cover .bg picture{display:block;width:100%;height:100%}
+.hero .bg picture img,.cover .bg picture img{display:block;width:100%;height:100%;object-fit:cover}
+@media(max-width:700px){
+  nav{grid-template-columns:minmax(0,1fr) auto;row-gap:8px;padding:12px 16px}
+  .logo{grid-column:1;grid-row:1;font-size:clamp(15px,4.2vw,19px)}
+  .cta{grid-column:2;grid-row:1;font-size:clamp(12px,3.5vw,15px);padding:5px 10px;border-radius:9px}
+  .links{grid-column:1/-1;grid-row:2;width:100%;min-width:0;display:flex;flex-wrap:nowrap;gap:clamp(8px,3vw,20px);justify-content:center;font-size:clamp(12px,3.8vw,17px);white-space:nowrap}
+  .links a{flex:0 0 auto}
+  html{scroll-padding-top:100px}
+  .hero .bg{inset:0}
+  .hero .bg img,#services-cover .bg img{object-position:center center}
+  .hero h1{font-size:clamp(32px,9vw,55px)}
+  .hero p{font-size:clamp(10px,2.8vw,16px)}
+  /* All four contact buttons remain on one row on narrow screens. */
+  .social{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px;width:100%;max-width:560px}
+  .social a{min-width:0;flex-direction:column;justify-content:center;gap:5px;padding:9px 2px;font-size:clamp(9px,2.6vw,12px);text-align:center}
+  .social svg{width:18px;height:18px}
+  .social .social-label{white-space:nowrap}
+}
+@media(max-width:360px){nav{padding-inline:10px}.links{gap:8px;font-size:12px}.social{gap:3px}.social a{font-size:9px}}
 /* services */
 .svc{display:grid;grid-template-columns:repeat(4,1fr);gap:40px 30px}
 @media(max-width:900px){.svc{grid-template-columns:repeat(2,1fr)}}
@@ -184,8 +204,8 @@ footer small{font-family:var(--f-footer);color:var(--mute);font-size:var(--fs-fo
 </nav>
 
 <header class="hero" id="home">
-  <!-- Hero photo: put your image at assets/hero.jpg -->
-  <div class="bg" id="heroBg"><img src="assets/hero.jpg" alt="" onerror="this.remove()"></div>
+  <!-- Responsive hero: desktop hero.jpg / mobile hero2.JPG -->
+  <div class="bg" id="heroBg"><picture><source media="(max-width: 700px)" srcset="assets/hero2.JPG"><img src="assets/hero.jpg" alt="" fetchpriority="high"></picture></div>
   <div>
     <h1 id="name" aria-label="Ali Mehryar"></h1>
     <p id="role"><span>DIRECTOR <i class="amp">&amp;</i> EDITOR</span></p>
@@ -217,9 +237,9 @@ footer small{font-family:var(--f-footer);color:var(--mute);font-size:var(--fs-fo
   <div class="grid portrait" data-set="portrait"></div>
 </div></section>
 
-<!-- Full-screen photo: put your image at assets/services.jpg -->
+<!-- Responsive services cover: desktop services.jpg / mobile services2.JPG -->
 <section class="cover" id="services-cover" data-for="services">
-  <div class="bg"><img src="assets/services.jpg" alt="" onerror="this.remove()"></div>
+  <div class="bg"><picture><source media="(max-width: 700px)" srcset="assets/services2.JPG"><img src="assets/services.jpg" alt="" loading="lazy"></picture></div>
   <p class="big">Services</p>
 </section>
 
