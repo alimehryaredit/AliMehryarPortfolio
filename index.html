@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Ali Mehryar – Director & Editor</title>
 <meta name="description" content="Ali Mehryar – Director, video editor, motion designer and colorist.">
@@ -279,20 +280,20 @@ const W = {
   ["Legendary Game Club Instagram Reels 4","(Editor)",2025,"vimeo:1239193514"],
   ["Leila Immigration Instagram Reels","(Editor)",2025,"vimeo:1239193523"],
   ["NOT Circle Underground Jazz Concert","(Videographer)",2025,"vimeo:1239194177"],
-  ["Hamed Behdad Hilaj","(Motion Graphic)",2023,"vimeo:1239201637"],
+  ["Hamed Behdad Hilaj","(Motion Graphic)",2023,"yt:NbXfdVPUpxM"],
   ["Mehrab Ghasemkhani Hilaj","(Motion Graphic)",2023,"vimeo:1239201642"],
   ["Saber Abar Workshop","(Motion Graphic)",2023,"vimeo:1239193565"],
   ["Saber Abar Hilaj","(Editor & Motion Graphic)",2023,"vimeo:1239193544"]],
  landscape:[
   ["Miami Agency Event Version 1","(Videographer)",2025,"vimeo:1239196650"],
   ["Miami Agency Event Version 2","(Videographer)",2025,"vimeo:1239196697"],
-  ["Daily Market Teaser","(Director & Editor)",2024,"vimeo:1239196482"],
-  ["Artaban Motors Teaser","(Editor)",2024,"vimeo:1239196478"],
-  ["Daily Andishan Stop Motion","(Director)",2024,"vimeo:1239196489"],
-  ["Foolad Qom Trailer","(Editor)",2025,"vimeo:1239196492"],
+  ["Daily Market Teaser","(Director & Editor)",2024,"yt:RzPsa3I6pNU"],
+  ["Artaban Motors Teaser","(Editor)",2024,"yt:-Heis4OWOiM"],
+  ["Daily Andishan Stop Motion","(Director)",2024,"yt:DCPV0itQjHU"],
+  ["Foolad Qom Trailer","(Editor)",2025,"yt:-M0BkknkAq0"],
   ["Latyan Forest Tree Planting","(Videographer)",2025,"vimeo:1239637165"],
-  ["Hattrick Movie Trailer Version 1","(Editor)",2025,"vimeo:1239196507"],
-  ["Hattrick Movie Trailer Version 2","(Editor)",2025,"vimeo:1239196584"],
+  ["Hattrick Movie Trailer Version 1","(Editor)",2025,"yt:CTHpozwd3To"],
+  ["Hattrick Movie Trailer Version 2","(Editor)",2025,"yt:hKzBO0AL_OA"],
   ["Thirteen Movie Trailer","(Editor)",2025,"vimeo:1239196718"],
   ["Frankenstein Movie Trailer","(Editor)",2025,"yt:5qxGC2WpYUg"],
   ["In Praise of Solitude","(Editor)",2025,"vimeo:1239196583"],
@@ -346,8 +347,8 @@ function closeVM(){vm.classList.remove("on","pt");vbox.innerHTML="";previews.for
 document.querySelectorAll(".card[data-n]").forEach(c=>c.addEventListener("click",e=>{
   e.preventDefault();const it=ITEMS[+c.dataset.n];
   previews.forEach(v=>v.pause());
-  vbox.innerHTML=it.type==="yt"?`<iframe src="https://www.youtube-nocookie.com/embed/${it.id}?autoplay=1&rel=0" allow="autoplay;fullscreen;picture-in-picture" allowfullscreen title="${it.title}"></iframe>`
-   :it.type==="vimeo"?`<iframe src="${vsrc(it.id)}" allow="autoplay;fullscreen" allowfullscreen title="${it.title}"></iframe>`
+  vbox.innerHTML=it.type==="yt"?`<iframe src="https://www.youtube-nocookie.com/embed/${it.id}?autoplay=1&rel=0" referrerpolicy="strict-origin-when-cross-origin" allow="autoplay;fullscreen;picture-in-picture" allowfullscreen title="${it.title}"></iframe>`
+   :it.type==="vimeo"?`<iframe src="${vsrc(it.id)}" referrerpolicy="strict-origin-when-cross-origin" allow="autoplay;fullscreen" allowfullscreen title="${it.title}"></iframe>`
    :`<video src="${it.src}" controls autoplay playsinline></video>`;
   vm.classList.toggle("pt",it.grp==="portrait");vm.classList.add("on")}));
 vm.querySelector(".x").onclick=closeVM;vm.onclick=e=>{if(e.target===vm)closeVM()};
