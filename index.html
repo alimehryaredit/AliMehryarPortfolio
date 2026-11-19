@@ -130,7 +130,23 @@ h3::after{content:"";flex:1;height:1px;background:var(--line)}
 .cover .big{position:relative;z-index:2;font:800 var(--fs-cover)/1 var(--f-cover-works);letter-spacing:.04em;text-transform:uppercase;padding-left:.04em;opacity:0;transform:translateY(40px);transition:opacity 1.2s,transform 1.2s var(--ease)}
 #services-cover .big{font-family:var(--f-cover-services)}
 .cover.in .big{opacity:1;transform:none}
-@media(max-width:700px){nav{grid-template-columns:1fr auto;row-gap:6px}.logo{grid-column:1;grid-row:1}.cta{grid-column:2;grid-row:1}.links{grid-column:1/-1;grid-row:2}html{scroll-padding-top:96px}}
+/* hamburger button (hidden on desktop) */
+.burger{display:none;justify-self:end;width:44px;height:44px;margin-right:-10px;background:none;border:0;cursor:pointer;color:var(--ink);position:relative;-webkit-tap-highlight-color:transparent}
+.burger span{position:absolute;left:11px;right:11px;height:2px;background:currentColor;border-radius:2px;transition:transform .35s var(--ease),opacity .2s,top .35s var(--ease)}
+.burger span:nth-child(1){top:15px}.burger span:nth-child(2){top:21px}.burger span:nth-child(3){top:27px}
+nav.open .burger span:nth-child(1){top:21px;transform:rotate(45deg)}
+nav.open .burger span:nth-child(2){opacity:0}
+nav.open .burger span:nth-child(3){top:21px;transform:rotate(-45deg)}
+@media(max-width:700px){
+  nav{grid-template-columns:1fr auto 1fr}
+  .cta{grid-column:1;grid-row:1;justify-self:start}
+  .logo{grid-column:2;grid-row:1;justify-self:center}
+  .burger{display:block;grid-column:3;grid-row:1}
+  nav.open{background:rgba(22,22,22,.96);backdrop-filter:blur(10px)}
+  .links{position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:4px;padding:8px clamp(16px,4vw,48px) 20px;background:rgba(22,22,22,.96);backdrop-filter:blur(10px);border-top:1px solid var(--line);opacity:0;visibility:hidden;transform:translateY(-8px);transition:opacity .3s,transform .4s var(--ease),visibility 0s .4s}
+  nav.open .links{opacity:1;visibility:visible;transform:none;transition:opacity .3s,transform .4s var(--ease)}
+  .links a{padding:10px 0}
+}
 /* services */
 .svc{display:grid;grid-template-columns:repeat(4,1fr);gap:40px 30px}
 @media(max-width:900px){.svc{grid-template-columns:repeat(2,1fr)}}
@@ -163,12 +179,14 @@ h3::after{content:"";flex:1;height:1px;background:var(--line)}
 .brief-cta{margin:26px 0 0}
 .brief-cta a{display:inline-block;background:var(--ink);color:var(--bg);padding:12px 26px;font-weight:600;text-decoration:none;transition:transform .3s var(--ease)}
 .brief-cta a:hover{transform:translateY(-2px)}
-.social{font-family:var(--f-social);display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:22px auto 36px;font-size:var(--fs-links)}
+.social{font-family:var(--f-social);display:flex;flex-wrap:nowrap;justify-content:center;gap:10px;margin:22px auto 36px;font-size:var(--fs-links)}
 .social a{display:inline-flex;align-items:center;gap:9px;padding:12px;line-height:1;text-decoration:none;color:var(--mute);border:1px solid var(--line);transition:color .3s,border-color .3s,transform .3s}
 .social a:hover{color:var(--ink);border-color:var(--ink);transform:translateY(-2px)}
 .social svg{width:19px;height:19px;flex:none;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
 .social .telegram-icon,.social .linkedin-icon{fill:currentColor;stroke:none}
 .social .social-label{color:var(--ink);font-weight:600}
+@media(max-width:700px){.social{gap:8px}.social a{gap:7px;padding:11px 10px;min-width:0}.social .social-label{font-size:12px}}
+@media(max-width:480px){.social{gap:10px}.social a{padding:13px}.social .social-label{display:none}.social svg{width:22px;height:22px}}
 footer small{font-family:var(--f-footer);color:var(--mute);font-size:var(--fs-footer)}
 
 @media(prefers-reduced-motion:reduce){*,*::after{animation:none!important;transition:none!important}.hero h1 span,.hero p,.svc article,.cap,.tag span,.cover .big{opacity:1!important;transform:none!important}.thumb{clip-path:inset(0)!important}html{scroll-behavior:auto}}
@@ -178,10 +196,11 @@ footer small{font-family:var(--f-footer);color:var(--mute);font-size:var(--fs-fo
 <div id="bar"></div>
 <nav id="nav">
   <a class="logo" href="#home">Ali Mehryar</a>
-  <div class="links">
+  <div class="links" id="menu">
     <a href="#home">Home</a><a href="#about">About</a><a href="#work">Work</a><a href="#services">Services</a>
   </div>
   <a class="cta" href="#contact">Contact</a>
+  <button class="burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
 </nav>
 
 <header class="hero" id="home">
@@ -386,6 +405,16 @@ addEventListener("resize",fitRole);addEventListener("load",fitRole);
   a.addEventListener("click",e=>{e.preventDefault();m.classList.add("on");m.querySelector(".opts a").focus()});
   m.querySelector(".x").onclick=close;m.addEventListener("click",e=>{if(e.target===m)close()});
   addEventListener("keydown",e=>{if(e.key==="Escape"&&m.classList.contains("on"))close()});
+})();
+
+/* mobile hamburger menu */
+(function(){const n=document.getElementById("nav"),b=document.getElementById("burger"),m=document.getElementById("menu");if(!n||!b||!m)return;
+  const set=o=>{n.classList.toggle("open",o);b.setAttribute("aria-expanded",o);b.setAttribute("aria-label",o?"Close menu":"Open menu")};
+  b.addEventListener("click",()=>set(!n.classList.contains("open")));
+  m.addEventListener("click",e=>{if(e.target.closest("a"))set(false)});
+  document.addEventListener("click",e=>{if(n.classList.contains("open")&&!n.contains(e.target))set(false)});
+  addEventListener("keydown",e=>{if(e.key==="Escape")set(false)});
+  addEventListener("resize",()=>{if(innerWidth>700)set(false)});
 })();
 
 /* ---------- MOTION ---------- */
